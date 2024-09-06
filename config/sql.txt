@@ -1,0 +1,200 @@
+
+USE college_db;
+
+
+
+-- Create a new table to combine all details
+CREATE TABLE student_details (
+    prn VARCHAR(15) PRIMARY KEY,
+    photo VARCHAR(255),
+    branch VARCHAR(100),
+    fullname VARCHAR(255),
+    date_of_birth DATE,
+    year_of_admission INT,
+    mother_tongue VARCHAR(50),
+    present_address VARCHAR(255),
+    mobile_number VARCHAR(15),
+    landline VARCHAR(15),
+    email VARCHAR(255),
+    blood_group VARCHAR(10),
+    father_name VARCHAR(255),
+    father_occupation VARCHAR(100),
+    father_mobile_number VARCHAR(15),
+    mother_name VARCHAR(255),
+    mother_occupation VARCHAR(100),
+    mother_mobile_number VARCHAR(15),
+    ssc_percentage DECIMAL(5,2),
+    ssc_medium VARCHAR(50),
+    ssc_board VARCHAR(100),
+    hsc_or_diploma_percentage DECIMAL(5,2),
+    hsc_or_diploma_medium VARCHAR(50),
+    hsc_or_diploma_board VARCHAR(100),
+    cet_percentile DECIMAL(5,2),
+    jee_percentile DECIMAL(5,2),
+    hobbies TEXT,
+    strengths TEXT,
+    weakness TEXT,
+    short_term_goals TEXT,
+    long_term_goals TEXT,
+    extra_curricular TEXT
+);
+
+INSERT INTO student_details (
+    prn, photo, branch, fullname, date_of_birth, year_of_admission, mother_tongue, present_address, mobile_number, landline, email, blood_group,
+    father_name, father_occupation, father_mobile_number, mother_name, mother_occupation, mother_mobile_number,
+    ssc_percentage, ssc_medium, ssc_board, hsc_or_diploma_percentage, hsc_or_diploma_medium, hsc_or_diploma_board, cet_percentile, jee_percentile,
+    hobbies, strengths, weakness, short_term_goals, long_term_goals, extra_curricular
+) VALUES
+('1234567890', 'path/to/photo1.jpg', 'Computer Science', 'John Doe', '2000-01-15', 2018, 'English', '123 Main St, City, Country', '1234567890', '0987654321', 'john.doe@example.com', 'O+',
+ 'Michael Doe', 'Engineer', '1112223333', 'Mary Doe', 'Teacher', '4445556666',
+ 85.5, 'English', 'CBSE', 88.0, 'English', 'CBSE', 95.0, 90.0,
+ 'Reading, Coding', 'Problem-solving, Teamwork', 'Procrastination', 'Graduate with honors', 'Become a software engineer', 'Volunteering, Sports'),
+
+('0987654321', 'path/to/photo2.jpg', 'Mechanical Engineering', 'Jane Smith', '2001-02-20', 2019, 'Hindi', '456 Elm St, City, Country', '9876543210', '0123456789', 'jane.smith@example.com', 'A+',
+ 'Robert Smith', 'Doctor', '7778889999', 'Patricia Smith', 'Nurse', '0001112222',
+ 90.0, 'Hindi', 'State Board', 85.5, 'Hindi', 'State Board', 92.0, 88.5,
+ 'Painting, Traveling', 'Creativity, Leadership', 'Public speaking', 'Secure an internship', 'Become a project manager', 'Debate club, Music'),
+
+('1122334455', 'path/to/photo3.jpg', 'Electrical Engineering', 'Alice Brown', '1999-11-30', 2017, 'Marathi', '789 Oak St, City, Country', '9988776655', '0112233445', 'alice.brown@example.com', 'B+',
+ 'David Brown', 'Lawyer', '5556667777', 'Susan Brown', 'Architect', '8889990000',
+ 78.0, 'Marathi', 'ICSE', 80.0, 'Marathi', 'ICSE', 85.0, 82.5,
+ 'Writing, Photography', 'Communication, Adaptability', 'Overthinking', 'Publish a research paper', 'Pursue higher education', 'Student council, Drama club'),
+
+('5566778899', 'path/to/photo4.jpg', 'Civil Engineering', 'Bob Johnson', '2002-05-10', 2020, 'English', '101 Pine St, City, Country', '1231231234', '3213213210', 'bob.johnson@example.com', 'AB+',
+ 'James Johnson', 'Businessman', '3334445555', 'Jennifer Johnson', 'Homemaker', '6667778888',
+ 82.5, 'English', 'State Board', 83.0, 'English', 'State Board', 88.0, 85.0,
+ 'Gaming, Blogging', 'Critical thinking, Time management', 'Impatience', 'Master a new programming language', 'Start a tech company', 'Robotics club, Chess team'),
+
+('6677889900', 'path/to/photo5.jpg', 'Information Technology', 'Charlie Davis', '2001-07-25', 2019, 'Gujarati', '202 Maple St, City, Country', '4564564567', '6546546543', 'charlie.davis@example.com', 'B-',
+ 'Richard Davis', 'Police Officer', '2223334444', 'Barbara Davis', 'Banker', '5556667777',
+ 87.0, 'Gujarati', 'CBSE', 89.0, 'Gujarati', 'CBSE', 92.5, 90.5,
+ 'Cooking, Hiking', 'Leadership, Organization', 'Perfectionism', 'Complete a certification course', 'Become a project leader', 'Cultural events, Volunteer work');
+
+-- Modify photo to NOT NULL and change data type
+ALTER TABLE student_details
+MODIFY photo TEXT NOT NULL;
+
+-- Modify branch to NOT NULL and change data type length
+ALTER TABLE student_details
+MODIFY branch VARCHAR(50) NOT NULL;
+
+-- Modify prn to NOT NULL with changed length
+ALTER TABLE student_details
+MODIFY prn VARCHAR(10) NOT NULL PRIMARY KEY;
+
+-- Modify fullname to NOT NULL
+ALTER TABLE student_details
+MODIFY fullname VARCHAR(255) NOT NULL;
+
+-- Modify date_of_birth to NOT NULL
+ALTER TABLE student_details
+MODIFY date_of_birth DATE NOT NULL;
+
+-- Modify year_of_admission to YEAR and NOT NULL
+ALTER TABLE student_details
+MODIFY year_of_admission YEAR NOT NULL;
+
+-- Modify mother_tongue to NOT NULL
+ALTER TABLE student_details
+MODIFY mother_tongue VARCHAR(50) NOT NULL;
+
+-- Modify present_address to TEXT and NOT NULL
+ALTER TABLE student_details
+MODIFY present_address TEXT NOT NULL;
+
+-- Modify mobile_number to NOT NULL
+ALTER TABLE student_details
+MODIFY mobile_number VARCHAR(15) NOT NULL;
+
+-- Modify father_name to NOT NULL
+ALTER TABLE student_details
+MODIFY father_name VARCHAR(255) NOT NULL;
+
+-- Modify father_occupation to NOT NULL
+ALTER TABLE student_details
+MODIFY father_occupation VARCHAR(255) NOT NULL;
+
+-- Modify father_mobile_number to NOT NULL
+ALTER TABLE student_details
+MODIFY father_mobile_number VARCHAR(15) NOT NULL;
+
+-- Modify mother_name to NOT NULL
+ALTER TABLE student_details
+MODIFY mother_name VARCHAR(255) NOT NULL;
+
+-- Modify mother_occupation to NOT NULL
+ALTER TABLE student_details
+MODIFY mother_occupation VARCHAR(255) NOT NULL;
+
+-- Modify mother_mobile_number to NOT NULL
+ALTER TABLE student_details
+MODIFY mother_mobile_number VARCHAR(15) NOT NULL;
+
+-- Modify landline to allow NULL
+ALTER TABLE student_details
+MODIFY landline VARCHAR(15);
+
+-- Modify email to NOT NULL
+ALTER TABLE student_details
+MODIFY email VARCHAR(255) NOT NULL;
+
+-- Modify ssc_percentage to FLOAT and NOT NULL
+ALTER TABLE student_details
+MODIFY ssc_percentage FLOAT NOT NULL;
+
+-- Modify ssc_medium to NOT NULL
+ALTER TABLE student_details
+MODIFY ssc_medium VARCHAR(50) NOT NULL;
+
+-- Modify ssc_board to NOT NULL
+ALTER TABLE student_details
+MODIFY ssc_board VARCHAR(50) NOT NULL;
+
+-- Modify hsc_or_diploma_percentage to FLOAT and NOT NULL
+ALTER TABLE student_details
+MODIFY hsc_or_diploma_percentage FLOAT NOT NULL;
+
+-- Modify hsc_or_diploma_medium to NOT NULL
+ALTER TABLE student_details
+MODIFY hsc_or_diploma_medium VARCHAR(50) NOT NULL;
+
+-- Modify hsc_or_diploma_board to NOT NULL
+ALTER TABLE student_details
+MODIFY hsc_or_diploma_board VARCHAR(50) NOT NULL;
+
+-- Modify cet_percentile to FLOAT
+ALTER TABLE student_details
+MODIFY cet_percentile FLOAT;
+
+-- Modify jee_percentile to FLOAT
+ALTER TABLE student_details
+MODIFY jee_percentile FLOAT;
+
+-- Modify blood_group to VARCHAR(3)
+ALTER TABLE student_details
+MODIFY blood_group VARCHAR(3);
+
+-- Modify hobbies to TEXT
+ALTER TABLE student_details
+MODIFY hobbies TEXT;
+
+-- Modify strengths to TEXT
+ALTER TABLE student_details
+MODIFY strengths TEXT;
+
+-- Modify weakness to TEXT
+ALTER TABLE student_details
+MODIFY weakness TEXT;
+
+-- Modify short_term_goals to TEXT
+ALTER TABLE student_details
+MODIFY short_term_goals TEXT;
+
+-- Modify long_term_goals to TEXT
+ALTER TABLE student_details
+MODIFY long_term_goals TEXT;
+
+-- Modify extra_curricular to TEXT
+ALTER TABLE student_details
+MODIFY extra_curricular TEXT;
+
