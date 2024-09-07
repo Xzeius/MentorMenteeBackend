@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use('/students', studentRoutes);
 app.use('/mentors', mentorRoutes);
 app.use('/', (req,res)=>{
-    res.send({message:"Hello World !!!"})
+    res.send({message:"Hello Worl !!!"})
 })
 
 const PORT = 8800;

@@ -11,7 +11,10 @@ const getStudentByPRN = async (req, res) => {
         const parents = await db('student_parents').where('prn', prn).first();
         const education = await db('student_education').where('prn', prn).first();
         const other = await db('student_other').where('prn', prn).first();
-        const ac_id = await db('academic_id').where('prn', prn).first();
+        const academicIdDetails = await db('student_details')
+  .join('academic_id', 'student_details.ac_id', 'academic_id.ac_id')
+  .where('student_details.prn', prn)
+  .select('academic_id.*').first();
 
 
         const studentData = {
@@ -20,7 +23,7 @@ const getStudentByPRN = async (req, res) => {
             ...parents,
             ...education,
             ...other,
-            ...ac_id,
+            ...academicIdDetails,
 
         };
 
@@ -91,12 +94,11 @@ const updateStudent = async (req, res) => {
                 long_term_goals: updatedStudent.long_term_goals,
                 extra_curricular: updatedStudent.extra_curricular,
             });
-            await trx('academic_id').where('prn', prn).update({
+            await trx('academic_id').where('ac_id', updatedStudent.ac_id).update({
                 semester: updatedStudent.semester,
                 branch: updatedStudent.branch,
-                divsion: updatedStudent.divsion,
+                division: updatedStudent.division, // Corrected typo from 'divsion' to 'division'
                 batch: updatedStudent.batch,
-                ac_id: updatedStudent.ac_id,
             });
 
 
