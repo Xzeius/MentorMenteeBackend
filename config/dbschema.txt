@@ -1,5 +1,5 @@
 
--- Table for entry point details
+-- Use the database
 USE college_db;
 
 -- Drop tables if they exist
@@ -41,10 +41,9 @@ CREATE TABLE student_personal (
     FOREIGN KEY (prn) REFERENCES student_details(prn)
 );
 
-
 -- Table for parents' details
 CREATE TABLE student_parents (
-    prn VARCHAR(10) NOT NULL,
+    prn VARCHAR(10) NOT NULL PRIMARY KEY,
     father_name VARCHAR(255) NOT NULL,
     father_occupation VARCHAR(255) NOT NULL,
     father_mobile_number VARCHAR(15) NOT NULL,
@@ -56,7 +55,7 @@ CREATE TABLE student_parents (
 
 -- Table for educational details
 CREATE TABLE student_education (
-    prn VARCHAR(10) NOT NULL,
+    prn VARCHAR(10) NOT NULL PRIMARY KEY,
     ssc_percentage FLOAT NOT NULL,
     ssc_medium VARCHAR(50) NOT NULL,
     ssc_board VARCHAR(50) NOT NULL,
@@ -70,7 +69,7 @@ CREATE TABLE student_education (
 
 -- Table for other details
 CREATE TABLE student_other (
-    prn VARCHAR(10) NOT NULL,
+    prn VARCHAR(10) NOT NULL PRIMARY KEY,
     hobbies TEXT,
     strengths TEXT,
     weakness TEXT,
@@ -79,6 +78,7 @@ CREATE TABLE student_other (
     extra_curricular TEXT,
     FOREIGN KEY (prn) REFERENCES student_details(prn)
 );
+
 
 
 
@@ -117,7 +117,6 @@ INSERT INTO student_other (prn, hobbies, strengths, weakness, short_term_goals, 
 ('PRN001', 'Reading, Swimming', 'Analytical thinking, Leadership', 'Public speaking', 'Complete certification courses', 'Become a manager in IT industry', 'Debating, Drama club'),
 ('PRN002', 'Gardening, Painting', 'Empathy, Creativity', 'Impatience', 'Learn new languages', 'Start own business', 'Music band, Volunteering'),
 ('PRN003', 'Photography, Traveling', 'Problem-solving, Time management', 'Perfectionism', 'Get internship abroad', 'Research in architecture', 'Sports, Coding club');
-
 
 
 
