@@ -28,32 +28,35 @@ const db = require('../config/knex.js');
 const getStudentByPRN = async (req, res) => {
     const prn = req.params.prn;
     try {
-        const student = await db('student_details').where('prn', prn).first();
-        const personal = await db('student_personal').where('prn', prn).first();
-        const parents = await db('student_parents').where('prn', prn).first();
-        const education = await db('student_education').where('prn', prn).first();
-        const other = await db('student_other').where('prn', prn).first();
-//         const academicIdDetails = await db('student_details')
-//   .join('academic_id', 'student_details.ac_id', 'academic_id.ac_id')
-//   .where('student_details.prn', prn)
-//   .select('academic_id.*').first();
-
-
-        const studentData = {
-            ...student,
-            ...personal,
-            ...parents,
-            ...education,
-            ...other,
-            // ...academicIdDetails,
-
-        };
-
-        res.json(studentData);
+      const student = await db('student_details').where('prn', prn).first();
+      const personal = await db('student_personal').where('prn', prn).first();
+      const parents = await db('student_parents').where('prn', prn).first();
+      const education = await db('student_education').where('prn', prn).first();
+      const other = await db('student_other').where('prn', prn).first();
+  
+      // Retrieve academic details using a join
+      const academicIdDetails = await db('student_details')
+        .join('academic_id', 'student_details.ac_id', 'academic_id.ac_id')
+        .where('student_details.prn', prn)
+        .select('academic_id.*')
+        .first();
+  
+      const studentData = {
+        ...student,
+        ...personal,
+        ...parents,
+        ...education,
+        ...other,
+        ...academicIdDetails, // Spread the properties of academicIdDetails
+      };
+  
+      res.json(studentData);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
-};
+  };
+  
+  
 
 
 
