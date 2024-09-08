@@ -2,36 +2,58 @@
 // Backend/controllers/student.js
 const db = require('../config/knex.js');
 
-// Get student details by PRN
 const getStudentByPRN = async (req, res) => {
     const prn = req.params.prn;
+  
     try {
-        const student = await db('student_details').where('prn', prn).first();
-        const personal = await db('student_personal').where('prn', prn).first();
-        const parents = await db('student_parents').where('prn', prn).first();
-        const education = await db('student_education').where('prn', prn).first();
-        const other = await db('student_other').where('prn', prn).first();
-        const academicIdDetails = await db('student_details')
-  .join('academic_id', 'student_details.ac_id', 'academic_id.ac_id')
-  .where('student_details.prn', prn)
-  .select('academic_id.*').first();
-
-
-        const studentData = {
-            ...student,
-            ...personal,
-            ...parents,
-            ...education,
-            ...other,
-            ...academicIdDetails,
-
-        };
-
-        res.json(studentData);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+      const result = await db('student_details')
+        .select('fullname')
+        .where({ prn })
+        .first();
+  
+      if (!result) {
+        return res.status(404).json({ error: 'Student not found' });
+      }
+  
+      const studentName = result.fullname;
+      res.json({ studentName });
+    } catch (error) {
+      console.error('Error fetching student:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-};
+  };
+
+
+// // Get student details by PRN
+// const getStudentByPRN = async (req, res) => {
+//     const prn = req.params.prn;
+//     try {
+//         const student = await db('student_details').where('prn', prn).first();
+//         const personal = await db('student_personal').where('prn', prn).first();
+//         const parents = await db('student_parents').where('prn', prn).first();
+//         const education = await db('student_education').where('prn', prn).first();
+//         const other = await db('student_other').where('prn', prn).first();
+//         const academicIdDetails = await db('student_details')
+//   .join('academic_id', 'student_details.ac_id', 'academic_id.ac_id')
+//   .where('student_details.prn', prn)
+//   .select('academic_id.*').first();
+
+
+//         const studentData = {
+//             ...student,
+//             ...personal,
+//             ...parents,
+//             ...education,
+//             ...other,
+//             ...academicIdDetails,
+
+//         };
+
+//         res.json(studentData);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// };
 
 
 
