@@ -1,6 +1,7 @@
 
 -- Use the database
 USE college_db;
+USE defaultdb;
 
 -- Drop tables if they exist
 DROP TABLE IF EXISTS student_other;
@@ -9,6 +10,7 @@ DROP TABLE IF EXISTS student_parents;
 DROP TABLE IF EXISTS student_personal;
 DROP TABLE IF EXISTS student_details;
 DROP TABLE IF EXISTS academic_id;
+DROP TABLE IF EXISTS student_score;
 
 -- Academic details table
 CREATE TABLE academic_id (
@@ -79,6 +81,13 @@ CREATE TABLE student_other (
     FOREIGN KEY (prn) REFERENCES student_details(prn)
 );
 
+create table student_score (
+    prn VARCHAR(10) NOT NULL PRIMARY KEY,
+    academics FLOAT,
+    sports FLOAT,
+    events FLOAT,
+    FOREIGN KEY (prn) REFERENCES student_details(prn)
+);
 
 
 
@@ -118,22 +127,11 @@ INSERT INTO student_other (prn, hobbies, strengths, weakness, short_term_goals, 
 ('PRN002', 'Gardening, Painting', 'Empathy, Creativity', 'Impatience', 'Learn new languages', 'Start own business', 'Music band, Volunteering'),
 ('PRN003', 'Photography, Traveling', 'Problem-solving, Time management', 'Perfectionism', 'Get internship abroad', 'Research in architecture', 'Sports, Coding club');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- Insert sample student scores
+INSERT INTO student_score (prn, academics, sports, events) VALUES
+('PRN001', 99, 99, 99),  -- John Doe
+('PRN002', 70, 40, 90),  -- Jane Smith
+('PRN003', 90, 70, 80);  -- Alice Johnson
 
 
 
