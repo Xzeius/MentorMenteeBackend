@@ -65,11 +65,7 @@ const updateStudent = async (req, res) => {
     const prn = req.params.prn;
     const updatedStudent = req.body;
 
-    if (updatedStudent.date_of_birth) {
-        const date = new Date(updatedStudent.date_of_birth);
-        const formattedDate = date.toISOString().split('T')[0]; // 'YYYY-MM-DD' format
-        updatedStudent.date_of_birth = formattedDate;
-    }
+    
 
     try {
         await db.transaction(async (trx) => {
